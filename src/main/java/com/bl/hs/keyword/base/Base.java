@@ -15,16 +15,19 @@ public class Base {
     public Properties properties;
 
     public WebDriver init_driver(String browserName) {
-        if(browserName.equals("chrome")) {
+        if (browserName.equals("chrome")) {
             System.setProperty("webdriver.chrome.driver", "C:\\Users\\Altamash\\Downloads\\chromedriver_win32\\chromedriver.exe");
-            if(properties.getProperty("headless").equals("yes")) {
+            if (properties.getProperty("headless").equals("yes")) {
                 //headless mode:
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--headless");
                 driver = new ChromeDriver(options);
-            }else{
-                driver= new ChromeDriver();
+            } else {
+                driver = new ChromeDriver();
             }
+            driver.manage().window().maximize();
+            driver.manage().deleteAllCookies();
+            return driver;
         }
         return driver;
     }
